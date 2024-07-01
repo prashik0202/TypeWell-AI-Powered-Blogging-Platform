@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import post from "@/public/post.jpg";
 import { Button } from "./ui/button";
-import { SquareArrowOutUpRight } from "lucide-react";
+import { SquareArrowOutUpRight, Star } from "lucide-react";
 import dayjs from "dayjs";
 import { Badge } from "./ui/badge";
 import { cn } from "@/lib/utils";

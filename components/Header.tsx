@@ -42,10 +42,9 @@ async function MobileHeader() {
           <SheetContent>
             <SheetHeader>
               <SheetTitle>
-                <div className="flex gap-x-4 items-center">
-                  <UserButton />
-                  {user && <h1>Welcome,{user?.firstName}</h1>}
-                </div>
+                <UserButton />
+
+                {/* {user && <h1>Welcome,{user?.firstName}</h1>} */}
               </SheetTitle>
             </SheetHeader>
             <div className="flex flex-col gap-y-3 mt-10">
@@ -63,6 +62,17 @@ async function MobileHeader() {
                   </Link>
                 );
               })}
+              {user && (
+                <Link href={"/profile"}>
+                  <Button
+                    size={"sm"}
+                    variant={"link"}
+                    // className="flex items-center gap-x-2"
+                  >
+                    Profile
+                  </Button>
+                </Link>
+              )}
               <ModeToggle />
             </div>
           </SheetContent>
@@ -105,7 +115,18 @@ async function DesktopHeader() {
           </Avatar> */}
         </div>
         <div className="flex flex-row gap-x-3 items-center">
-          {user && <h1>Welcome,{user?.firstName}</h1>}
+          {user && (
+            <Link href={"/profile"}>
+              <Button
+                size={"sm"}
+                variant={"link"}
+                // className="flex items-center gap-x-2"
+              >
+                Profile
+              </Button>
+            </Link>
+          )}
+          {/* {user && <h1>{user?.firstName}</h1>} */}
           <UserButton />
           <ModeToggle />
         </div>

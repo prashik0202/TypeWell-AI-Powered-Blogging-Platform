@@ -23,10 +23,10 @@ export default function Home() {
       <div className="w-full flex items-center justify-center text-center">
         {/* <Image src={bghome} alt="bg" className="w-full h-[350px] md:h-[650px] object-cover"/> */}
         <div className="p-5 md:p-20">
-          <h1 className=" text-4xl md:text-9xl  font-semibold bg-gradient-to-r from-sky-400 to-green-500 bg-clip-text text-transparent">
+          <h1 className=" text-6xl md:text-9xl  font-semibold bg-gradient-to-r from-sky-400 to-green-500 bg-clip-text text-transparent">
             Typewell
           </h1>
-          <h1 className="text-2xl md:text-6xl  mt-4 font-semibold bg-gradient-to-r from-sky-400 to-green-500 bg-clip-text text-transparent">
+          <h1 className="text-6xl md:text-6xl  mt-4 font-semibold bg-gradient-to-r from-sky-400 to-green-500 bg-clip-text text-transparent">
             an{" "}
             <span className="bg-gradient-to-r from-violet-500 to-fuchsia-600 bg-clip-text text-transparent">
               AI powered

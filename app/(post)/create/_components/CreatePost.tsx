@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import Tiptap from "@/components/Tiptap";
 import { Switch } from "@/components/ui/switch";
 import { redirect } from "next/navigation";
+import { Star } from "lucide-react";
 
 const CreatePostPage = () => {
   // const user = await currentUser();
@@ -47,7 +48,6 @@ const CreatePostPage = () => {
         id: "create-post",
       });
 
-      redirect("/");
       //reset the form
       form.reset({
         content: " ",
@@ -105,15 +105,23 @@ const CreatePostPage = () => {
   const handleSubmit = async () => {
     console.log(form.getValues("description"));
     // await console.log("Hello");
-    const apiResponse = await callGeminiApi(form.getValues("description"));
-    if (apiResponse !== undefined) {
-      console.log(apiResponse);
-      setContent(apiResponse);
+    if (form.getValues("description") === undefined) {
+      return toast.error("Please provide description field");
+    } else {
+      const apiResponse = await callGeminiApi(form.getValues("description"));
+      if (apiResponse !== undefined) {
+        console.log(apiResponse);
+        setContent(apiResponse);
+      }
     }
   };
 
   return (
     <div className="my-10">
+      <p className="mt-5 text-sm">
+        Based on description mentioned you can generate Content for your Blog
+        post using A.I
+      </p>
       <Button
         variant={"outline"}
         className="bg-purple-200 dark:bg-purple-700 my-2"
@@ -132,7 +140,9 @@ const CreatePostPage = () => {
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Title</FormLabel>
+                <FormLabel className="text-purple-500 font-semibold">
+                  Title
+                </FormLabel>
                 <FormControl>
                   <Input defaultValue={""} {...field} />
                 </FormControl>
@@ -148,7 +158,9 @@ const CreatePostPage = () => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel className="text-purple-500 font-semibold">
+                  Description
+                </FormLabel>
                 <FormControl>
                   <Input defaultValue={""} {...field} />
                 </FormControl>
@@ -163,9 +175,12 @@ const CreatePostPage = () => {
             control={form.control}
             name="premium"
             render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+              <FormItem className="flex flex-row items-center justify-start rounded-lg p-4 space-x-6 border">
                 <div className="space-y-0.5">
-                  <FormLabel className="text-base">Premium Content</FormLabel>
+                  <FormLabel className="text-purple-500 font-semibold flex gap-x-3 ">
+                    <span>Premium Content</span>{" "}
+                    <Star className="text-yellow-400 h-4 w-4" />
+                  </FormLabel>
                   <FormDescription>
                     By enabling this your content only visible to premium users
                   </FormDescription>
@@ -185,7 +200,9 @@ const CreatePostPage = () => {
             name="content"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Content</FormLabel>
+                <FormLabel className="text-purple-500 font-semibold">
+                  Content
+                </FormLabel>
                 <FormControl>
                   {/* <Textarea
                     defaultValue={""}
@@ -208,10 +225,6 @@ const CreatePostPage = () => {
           </Button>
         </form>
       </Form>
-      <p className="mt-5 text-sm">
-        Based on description mentioned you can generate Content for your Blog
-        post using A.I
-      </p>
     </div>
   );
 };
