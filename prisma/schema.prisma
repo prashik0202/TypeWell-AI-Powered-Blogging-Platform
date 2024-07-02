@@ -13,6 +13,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Creating User Schema 
+// which stores the users in SignUp in our platform
+// also keep track of paid users
+model User {
+  userId String 
+  email String
+  premium Boolean @default(false)
+  @@unique([userId, email ])
+}
+
 // Creating Schema for DataBase
 // for Post contain : 
 // userId(string), title(string), description(string), premium(boolean),User_name(string), createdAt(Date), content(String)

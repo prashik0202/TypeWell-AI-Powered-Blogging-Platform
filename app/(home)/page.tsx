@@ -1,11 +1,9 @@
 "use client";
-import Image from "next/image";
-import bghome from "../../public/home-bg.jpg";
-import { demoContent } from "@/constants";
 import BlogCard from "@/components/BlogCard";
 import { useQuery } from "@tanstack/react-query";
 import { getAllPostResponseType } from "../api/post/route";
-import SkletonWrapper from "@/components/SkletonWrapper";
+import Link from "next/link";
+import { Post } from "@prisma/client";
 
 export default function Home() {
   const allPosts = useQuery<getAllPostResponseType>({
@@ -23,10 +21,10 @@ export default function Home() {
       <div className="w-full flex items-center justify-center text-center">
         {/* <Image src={bghome} alt="bg" className="w-full h-[350px] md:h-[650px] object-cover"/> */}
         <div className="p-5 md:p-20">
-          <h1 className=" text-6xl md:text-9xl  font-semibold bg-gradient-to-r from-sky-400 to-green-500 bg-clip-text text-transparent">
+          <h1 className=" text-5xl md:text-9xl  font-semibold bg-gradient-to-r from-sky-400 to-green-500 bg-clip-text text-transparent">
             Typewell
           </h1>
-          <h1 className="text-6xl md:text-6xl  mt-4 font-semibold bg-gradient-to-r from-sky-400 to-green-500 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-6xl  mt-4 font-semibold bg-gradient-to-r from-sky-400 to-green-500 bg-clip-text text-transparent">
             an{" "}
             <span className="bg-gradient-to-r from-violet-500 to-fuchsia-600 bg-clip-text text-transparent">
               AI powered
@@ -41,20 +39,23 @@ export default function Home() {
       </div>
 
       <div className="mt-10">
-        <h1 className="text-3xl underline underline-offset-4">
-          Trending Blogs
-        </h1>
+        {postAvilable?.length === 0 && (
+          <div className=" w-full p-10">
+            <h1 className="text-center text-3xl text-card-foreground">
+              No posts yet!😊
+            </h1>
+            <p className="text-center mt-5">
+              Naviagate to{" "}
+              <Link href={"/create"} className="underline">
+                Create Post
+              </Link>{" "}
+              page to create your own first post
+            </p>
+          </div>
+        )}
         <div className="mt-5 grid grid-col-1 md:grid-cols-2 gap-4">
-          {postAvilable?.length === 0 && (
-            <div>
-              <h1 className="text-center text-3xl text-slate-300">
-                No posts yet!😊
-              </h1>
-              <p>Naviagate to create page to create your own first post</p>
-            </div>
-          )}
           {postAvilable &&
-            postAvilable.map((item) => (
+            postAvilable.map((item: Post) => (
               <BlogCard
                 key={item.title}
                 title={item.title}

@@ -25,7 +25,7 @@ import { Button } from "@/components/ui/button";
 import Tiptap from "@/components/Tiptap";
 import { Switch } from "@/components/ui/switch";
 import { redirect } from "next/navigation";
-import { Star } from "lucide-react";
+import { SparklesIcon, Star } from "lucide-react";
 
 const CreatePostPage = () => {
   // const user = await currentUser();
@@ -106,7 +106,12 @@ const CreatePostPage = () => {
     console.log(form.getValues("description"));
     // await console.log("Hello");
     if (form.getValues("description") === undefined) {
-      return toast.error("Please provide description field");
+      return toast.error("Please provide description field", {
+        unstyled: false,
+        classNames: {
+          toast: "bg-orange-300",
+        },
+      });
     } else {
       const apiResponse = await callGeminiApi(form.getValues("description"));
       if (apiResponse !== undefined) {
@@ -128,6 +133,7 @@ const CreatePostPage = () => {
         onClick={() => handleSubmit()}
         disabled={Loading}
       >
+        <SparklesIcon className="h-4 w-4 mr-4" />
         {Loading ? "Loading..." : "Generate with AI"}
       </Button>
       <Form {...form}>

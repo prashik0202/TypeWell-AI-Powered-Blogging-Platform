@@ -1,11 +1,8 @@
 import React from "react";
-import Image from "next/image";
-import post from "@/public/post.jpg";
 import { Button } from "./ui/button";
 import { SquareArrowOutUpRight, Star } from "lucide-react";
 import dayjs from "dayjs";
 import { Badge } from "./ui/badge";
-import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 interface Props {
@@ -26,7 +23,7 @@ const BlogCard = ({
   postId,
 }: Props) => {
   return (
-    <div className="w-full flex flex-col  border drop-shadow-md hover:drop-shadow-xl dark:shadow-white bg-card justify-start">
+    <div className="w-full flex flex-col  border bg-card justify-start shadow-2xl dark:shadow-slate-800 dark:border-none">
       <div className="w-full h-full  p-5">
         <h1 className="text-4xl  font-semibold">{title}</h1>
         <p className="text-sm my-2">Posted by: {author_name}</p>
@@ -47,9 +44,10 @@ const BlogCard = ({
         <p className="text-sm text-foreground">
           Posted On: {dayjs(created_date).format("MMM DD, YYYY")}
         </p>
-        <Button variant={"outline"} className="flex items-center gap-x-2 mt-4">
-          <Link href={`/${postId}`}>Read Now</Link>
-          <SquareArrowOutUpRight className="h-4 w-4" />
+        <Button variant={"ghost"} className=" mt-4" asChild>
+          <Link href={`/${postId}`}>
+            Read Now <SquareArrowOutUpRight className="h-4 w-4 ml-2" />
+          </Link>
         </Button>
       </div>
     </div>

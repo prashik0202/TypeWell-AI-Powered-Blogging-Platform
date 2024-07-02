@@ -27,7 +27,7 @@ export async function CreatePost(form: CreatePostSchemaType) {
       description: description,
       premium: premium,
       title: title,
-      userName: user.fullName,
+      userName: user?.fullName,
     },
   });
 
